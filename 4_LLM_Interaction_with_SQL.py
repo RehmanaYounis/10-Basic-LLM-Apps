@@ -42,6 +42,5 @@ if question != '':
             st.subheader("Result from Database")
             for row in response:
                 st.write(row)
-                st.subheader(row)
             
  
