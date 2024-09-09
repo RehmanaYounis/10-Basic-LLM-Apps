@@ -37,10 +37,9 @@ if question != '':
     if submit:
         query=model.invoke(formatted_prompt)
         print("LLM generated the following query:/n", query)
-        if query != 'NULL':
-            response=read_from_db(query=query.content, db="students_records.db")
-            st.subheader("Result from Database")
-            for row in response:
-                st.write(row)
+        response=read_from_db(query=query.content, db="students_records.db")
+        st.subheader("Result from Database")
+        for row in response:
+            st.write(row)
             
  
