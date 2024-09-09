@@ -21,6 +21,7 @@ prompt= """
     and avoid including the word "SQL" in the output. 
     
     Question : {question}
+    If no Question is provided send Blank
     """
 
 Prompt_template = ChatPromptTemplate.from_template(prompt)
@@ -30,15 +31,17 @@ model = ChatGoogleGenerativeAI(model='gemini-1.5-flash')
 st.set_page_config(page_title="Database Agent")
 st.header("App to Interact with Database")
 question=st.text_input("Input: ", key="input")
-formatted_prompt = prompt.format(question=question)
 submit=st.button("Question")
-if submit:
-    query=model.invoke(formatted_prompt)
-    print("LLM generated the following query:/n", query)
-    response=read_from_db(query=query.content, db="students_records.db")
-    st.subheader("Result from Database")
-    for row in response:
-        st.write(row)
-        st.header(row)
-        
+if question != '':
+    formatted_prompt = prompt.format(question=question)
+    if submit:
+        query=model.invoke(formatted_prompt)
+        print("LLM generated the following query:/n", query)
+        if query != 'NULL':
+            response=read_from_db(query=query.content, db="students_records.db")
+            st.subheader("Result from Database")
+            for row in response:
+                st.write(row)
+                st.subheader(row)
+            
  
