@@ -7,7 +7,7 @@ import sqlite3
 import streamlit as st
 import import_ipynb
 from langchain.prompts import ChatPromptTemplate
-from LLM_Interaction_with_SQL import read_from_db
+from Create_SQL_DB import read_from_db
 
 prompt= """
     You are an expert in translating English questions into SQL queries.
@@ -39,10 +39,6 @@ if submit:
     st.subheader("Result from Database")
     for row in response:
         st.write(row)
-        #st.header(row)
+        st.header(row)
         
-        
-# formatted_prompt = prompt.format(question="show me all students")
-# query=model.invoke(formatted_prompt)
-# print("LLM generated the following query:\n", query.content)
-# response=read_from_db(query=query.content, db="students_records.db")
+ 
